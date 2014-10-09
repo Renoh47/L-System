@@ -3,13 +3,14 @@
 
 #include <cmath>
 #include <vector>
+#include <stddef.h>
 
 // Point:
 // A simple class to store a position vector
 //
 class Point {
 public:
-	Point(x, y);
+	Point(int x, int y);
 	float x;
 	float y;
 	Point operator+(const Point& right);
@@ -20,18 +21,22 @@ public:
 class Turtle {
 public:
 	Turtle();
-	Turtle::Turtle(Point p, float angle = 90);
+	Turtle(Point p, float angle = 90);
 	Turtle(float x, float y);
 	void turnLeft();
 	void turnRight();
 	void goForward(float distance = 1.0);
+	void drawForward(float distance = 1.0);
 	void turn(float angle);
-	Point pop();
-	void push(Point p);
+	void pop(Point* p, float* dir);
+	void push(Point p, float dir);
 private:
+
 	float turnAngle;
 	float direction;
 	Point location;
 	std::vector<Point> locStack;
+	std::vector<float> dirStack;
 };
 
+#endif
